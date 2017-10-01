@@ -1,0 +1,113 @@
+<div class="container">
+    <br>
+    <h2>Your Filters</h2>
+    <table class="table borderless" >
+        <tbody>
+            <tr> 
+                <td colspan="1">
+                    <strong>Compatibility Score(%)</strong> <br>
+                    <label> Min: <input type="number" min="1" max="99" [(ngModel)]="filter.minCompatibilityScore"/></label>
+                    <label> Max: <input type="number" min="1" max="99" [(ngModel)]="filter.maxCompatibilityScore"/></label>
+                </td>
+                <td colspan="1">
+                    <strong>Age</strong> <br>
+                    <label>Min: <input type="number" min="18" max="95" [(ngModel)]="filter.minAge"/> </label>
+                    <label>Max: <input type="number" min="18" max="95" [(ngModel)]="filter.maxAge"/></label>
+                </td>
+                <td colspan="1">
+                    <strong>Height(cm)</strong> <br>
+                    <label>Min: <input type="number" min="135" max="210" [(ngModel)]="filter.minHeight"/></label>
+                    <label>Max: <input type="number" min="135" max="210" [(ngModel)]="filter.maxHeight"/></label>
+                </td>
+                <td>
+                    <strong>Distance</strong> <br>
+                    <select [(ngModel)]="filter.distanceLevel">
+                            <option value="MINIMUM">Below 30 km</option>
+                            <option value="MODERATE">30 km to 300 km</option>
+                            <option value="MAXIMUM">Above 300 km</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <strong>Has Profile Photo?</strong>
+                    <input type="checkbox" [checked]="filter.hasPhoto" (change)="filter.hasPhoto = !filter.hasPhoto" />
+                </td>
+                <td>
+                    <strong>In Contact?</strong>
+                    <input type="checkbox" [checked]="filter.inContact" (change)="filter.inContact = !filter.inContact" />
+                </td>
+                <td>
+                    <strong>Is favourite?</strong>
+                    <input type="checkbox" [checked]="filter.isFavourite" (change)="filter.isFavourite = !filter.isFavourite" />
+                </td>
+                <td> 
+                    <button (click)="filterProfiles()" class="btn btn-success">Apply</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <h2>Your Matches</h2>
+    <table class="table table-striped" >
+        <thead>
+            <tr>
+                <th>Photo</th>
+                <th colspan="2">Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let profile of profiles">
+                <td> <img width="200px" height="200px" src="{{ profile.main_photo }}" class="figure-img img-fluid rounded" alt="No Profile Photo!"></td>
+                <td>
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr>
+                                <td><strong>Name</strong></td>
+                                <td>{{ profile.display_name }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Age</strong></td>
+                                <td>{{ profile.age }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>City</strong></td>
+                                <td>{{ profile.city.name }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Job</strong></td>
+                                <td>{{ profile.job_title }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Height</strong></td>
+                                <td>{{ profile.height_in_cm }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+                <td>
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr>
+                                <td><strong>Religion</strong></td>
+                                <td>{{ profile.religion }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Is Favourite</strong></td>
+                                <td>{{ profile.favourite == true ? "YES" : "NO" }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Compatibility Score</strong></td>
+                                <td>{{ profile.compatibility_score | percent }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Contacts Exchanged</strong></td>
+                                <td>{{ profile.contacts_exchanged }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
